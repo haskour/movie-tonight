@@ -1,3 +1,5 @@
+import React from "react";
+import { StyleSheet, Text, View, TextInput, Image } from "react-native";
 export default function AppHeader({ props }) {
   return (
     <View style={styles.headerStyle}>
@@ -24,6 +26,8 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    position: 'relative',
+    zIndex: 99
   },
   searchTitle: {
     fontSize: 30,
