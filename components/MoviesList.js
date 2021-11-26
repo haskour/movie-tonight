@@ -36,6 +36,7 @@ export default function MoviesList(props) {
           />
         )}
         keyExtractor={(item) => item.id}
+        ListFooterComponent={<NoMoviesFound />}
       />
     </SafeAreaView>
   );
