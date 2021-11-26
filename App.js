@@ -7,6 +7,20 @@ import MoviesList from "./components/MoviesList";
 import axios from "./services/axiosConfig";
 
 export default function App() {
+  const [moviesSearchTimeOut, setMoviesSearchTimeOut] = useState();
+
+  const searchKeyword = (text) => {
+    if (moviesSearchTimeOut) {
+      clearTimeout(moviesSearchTimeOut);
+    }
+
+    const moviesSearchT = setTimeout(() => {
+      searchMovies(text);
+    }, 1500);
+
+    setMoviesSearchTimeOut(moviesSearchT);
+  };
+
   const [movies, setMoviesResult] = useState([]);
   const searchMovies = useCallback(
     async (query) => {
@@ -20,7 +34,6 @@ export default function App() {
         })
         .catch((error) => {
           setMoviesResult([]);
-
           console.log(error);
         });
     },
@@ -30,7 +43,7 @@ export default function App() {
     <SafeAreaProvider>
       <StatusBar backgroundColor={"#EB7660"} />
       <View>
-        <AppHeader onChangeText={(text) => searchMovies(text)} />
+        <AppHeader onChangeText={(text) => searchKeyword(text)} />
         <MoviesList data={movies} />
       </View>
     </SafeAreaProvider>

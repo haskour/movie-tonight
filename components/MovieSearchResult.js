@@ -10,7 +10,7 @@ export default function MovieSearchResult(props) {
         paddingHorizontal: 20,
         paddingVertical: 20,
         borderBottomWidth: 1,
-        borderBottomColor: "#999",
+        borderBottomColor: "#ecf0f1",
       }}
     >
       <Image
