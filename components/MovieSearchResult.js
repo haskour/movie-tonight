@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import moment from "moment";
 export default function MovieSearchResult(props) {
   return (
     <View
@@ -29,7 +30,7 @@ export default function MovieSearchResult(props) {
         <Text style={{ fontWeight: "bold", fontSize: 16 }}>
           {props.data.title}
         </Text>
-        <Text>{props.data.release_date}</Text>
+        <Text>{moment(props.data.release_date, "YYYY-MM-DD").format("MMM [,] DD YYYY")}</Text>
       </View>
     </View>
   );
