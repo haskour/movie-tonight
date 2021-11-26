@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, Image } from "react-native";
-export default function AppHeader({ props }) {
+
+export default function AppHeader({ onChangeText }) {
   return (
     <View style={styles.headerStyle}>
       <Text style={styles.searchTitle}>Search</Text>
@@ -12,6 +13,7 @@ export default function AppHeader({ props }) {
         <TextInput
           placeholder="Search"
           editable
+          onChangeText={(text) => onChangeText(text)}
           style={styles.textInputStyle}
         />
       </View>
@@ -26,8 +28,8 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    position: 'relative',
-    zIndex: 99
+    position: "relative",
+    zIndex: 99,
   },
   searchTitle: {
     fontSize: 30,
