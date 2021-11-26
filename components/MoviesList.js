@@ -10,7 +10,7 @@ import {
 import React from "react";
 import NoMoviesFound from "./NoMoviesFound";
 import MovieSearchResult from "./MovieSearchResult";
-
+import { useNavigation } from "@react-navigation/native";
 function MovieItem({ id, data, onSelect }) {
   return (
     <TouchableOpacity onPress={() => onSelect(id)}>
@@ -19,11 +19,12 @@ function MovieItem({ id, data, onSelect }) {
   );
 }
 
-function selectMovie(item) {
-  console.log(item);
+function selectMovie(item, navigation) {
+  navigation.navigate("MovieDetail", { id: item });
 }
 
 export default function MoviesList(props) {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -32,7 +33,7 @@ export default function MoviesList(props) {
           <MovieItem
             id={item.id}
             data={item}
-            onSelect={(movie) => selectMovie(movie)}
+            onSelect={(movie) => selectMovie(movie, navigation)}
           />
         )}
         keyExtractor={(item) => item.id}
