@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, Dimensions, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  ScrollView,
+  Pressable,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { StatusBar } from "react-native";
 import axios from "../services/axiosConfig";
-
+import Rating from "../components/Rating";
 export default function MovieDetailScreen({ route, navigation }) {
   const { id } = route.params;
   const [movie, setMovie] = useState();
@@ -35,7 +44,13 @@ export default function MovieDetailScreen({ route, navigation }) {
                 position: "relative",
               }}
             >
-              <View style={{ borderBottomLeftRadius: 30, overflow: "hidden" }}>
+              <View
+                style={{
+                  borderBottomLeftRadius: 30,
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+              >
                 <Image
                   source={{
                     uri:
@@ -76,12 +91,18 @@ export default function MovieDetailScreen({ route, navigation }) {
                   />
                 </View>
               </View>
+
+              <Pressable
+                style={{ position: "absolute", bottom: -30, right: 20 }}
+              >
+                <Image source={require("../assets/button_play.png")} />
+              </Pressable>
             </View>
 
             <View
               style={{
                 paddingLeft: 165,
-                paddingTop: 20,
+                paddingTop: 30,
                 paddingHorizontal: 30,
               }}
             >
@@ -91,14 +112,15 @@ export default function MovieDetailScreen({ route, navigation }) {
               <Text style={{ color: "#555", fontSize: 18 }}>
                 Francis ford coppola
               </Text>
-              <Image
-                style={{ marginTop: 5 }}
-                source={require("../assets/ico_rate.png")}
-              />
+              <Rating range={movie.vote_average / 2} />
             </View>
 
-            <View style={{paddingTop: 40, paddingHorizontal: 25}}>
-              <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>Synopsis</Text>
+            <View style={{ paddingTop: 40, paddingHorizontal: 25, paddingBottom: 120 }}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}
+              >
+                Synopsis
+              </Text>
               <Text style={{ fontSize: 16, color: "#999" }}>
                 {movie.overview}
               </Text>
@@ -106,6 +128,31 @@ export default function MovieDetailScreen({ route, navigation }) {
           </View>
         </ScrollView>
       )}
+      <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          // height: 50,
+          width: screen.width,
+          backgroundColor: "#fff",
+          paddingHorizontal: 20,
+          paddingVertical: 20
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            height: 50,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: '#EB7660',
+            borderRadius: 15
+      
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 18 }}>Visit website</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 }
